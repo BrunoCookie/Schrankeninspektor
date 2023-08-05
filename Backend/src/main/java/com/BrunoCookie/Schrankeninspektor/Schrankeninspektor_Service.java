@@ -1,8 +1,10 @@
-package com.bbonadonna.Schrankeninspektor;
+package com.BrunoCookie.Schrankeninspektor;
 
+import com.BrunoCookie.Schrankeninspektor.Utils.DB_API_Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
@@ -18,7 +20,8 @@ public class Schrankeninspektor_Service {
         this.db_api_utils = db_api_utils;
     }
 
-    public boolean isCurrentlyOpen(){
+    public boolean isCurrentlyOpen() throws IOException {
+        db_api_utils.getTrainInformationFromAPI(LocalDateTime.now());
         return false;
     }
 
