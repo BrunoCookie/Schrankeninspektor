@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 @Service
 public class DB_API_Utils {
@@ -32,32 +33,43 @@ public class DB_API_Utils {
     private final String GRIESHEIM_EVA_NO = "8002046";
     private final String FRANKFURT_HBF = "Frankfurt Hbf (tief)";
 
-    public HashMap<String, LocalDateTime> getTrainInformationFromAPI(LocalDateTime time) throws IOException {
+    public HashSet<LocalDateTime> getTrainInformationFromAPI(LocalDateTime time) throws IOException {
         // Get Planned Data
-        ArrayList<Stop> stops = getPlannedData(time);
+        HashMap<String, Stop> stops = getPlannedData(time);
 
         // Apply recent changes to planned data
         applyRecentChanges(stops);
 
-        // Clear hashmap and save
+        HashSet<LocalDateTime> stopTimes = new HashSet<>();
+        stops.forEach((id, stop) -> stopTimes.add(stop.getTime()));
 
-        return new HashMap<>();
+        return stopTimes;
     }
 
-    private void applyRecentChanges(ArrayList<Stop> stops) throws IOException {
+    private void applyRecentChanges(HashMap<String, Stop> stops) throws IOException {
         // Get Recent Changes
         ArrayList<Recent_Change> recentChanges = getRecentChanges();
 
         // Compare both Hashmaps
         // Replace stop time if Change available
-        for(int i = 0; i < recentChanges.size(); i++){
+        for (int i = 0; i < recentChanges.size(); i++) {
+            Recent_Change recentChange = recentChanges.get(i);
+            if (!stops.containsKey(recentChange.getId())) {
+                continue;
+            }
 
+            Stop stop = stops.get(recentChange.getId());
+            if (stop.isTimeFromArrival()) {
+                stop.setTime(recentChange.getArTime());
+            } else {
+                stop.setTime(recentChange.getDpTime());
+            }
         }
 
         // Add new stops if not available in planned --> Ignore for now
     }
 
-    private ArrayList<Stop> getPlannedData(LocalDateTime time) throws IOException {
+    private HashMap<String, Stop> getPlannedData(LocalDateTime time) throws IOException {
         // Format Day and Time
         String formattedTime = Date_Utils.formatDate(time);
 
@@ -68,7 +80,7 @@ public class DB_API_Utils {
         Document doc = getXMLFromHttpRequest(con);
 
         // Fill Hashmap
-        ArrayList<Stop> stops = new ArrayList<>();
+        HashMap<String, Stop> stops = new HashMap<>();
         NodeList nodeList = doc.getElementsByTagName("s");
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element stop = (Element) nodeList.item(i);
@@ -88,11 +100,13 @@ public class DB_API_Utils {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmm"); // Bsp. Time: 2308041414
             LocalDateTime formattedXMLTime = LocalDateTime.parse(timeXML, formatter);
 
-            stops.add(Stop.builder().
-                          id(stopId).
-                          time(formattedXMLTime).
-                          isTimeFromArrival(isTimeFromArrival).
-                          build());
+            Stop stopObj = Stop.builder().
+                               id(stopId).
+                               time(formattedXMLTime).
+                               isTimeFromArrival(isTimeFromArrival).
+                               build();
+
+            stops.put(stopId, stopObj);
         }
 
         return stops;
