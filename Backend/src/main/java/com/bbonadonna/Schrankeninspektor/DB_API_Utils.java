@@ -1,4 +1,4 @@
-package com.bbonadonna.Schrankeninspektor.DB_Api_Adapter;
+package com.bbonadonna.Schrankeninspektor;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 @Service
-public class DB_Api_Service {
+public class DB_API_Utils {
     @Value("${clientId}")
     private String clientId;
     @Value("${clientKey}")
@@ -26,7 +26,6 @@ public class DB_Api_Service {
     private final String URL = "https://apis.deutschebahn.com/db-api-marketplace/apis/timetables/v1/";
     private final String GRIESHEIM_EVA_NO = "8002046";
     private final String FRANKFURT_HBF = "Frankfurt Hbf (tief)";
-    private HashMap<String, LocalDateTime> stopMap = new HashMap<>(); // String = StopID, LocalDateTime = Abfahrts-/Ankunftszeit
 
     public void getTrainInformationFromAPI() throws IOException {
         // Get Planned Data
