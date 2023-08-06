@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<timetable station='Frankfurt-Griesheim'>
+    <s id="3280872127021889701-2308041444-3">
+        <tl f="S" t="p" o="800528" c="S" n="36237"/>
+        <ar pt="2308041449" pp="1" l="2" ppth="Frankfurt-Höchst|Frankfurt-Nied"/>
+        <dp pt="2308041449" pp="1" l="2" ppth="Frankfurt Hbf (tief)|Frankfurt(M)Taunusanlage|Frankfurt(M)Hauptwache|Frankfurt(M)Konstablerwache|Frankfurt(M)Ostendstraße|Frankfurt(M)Mühlberg|Offenbach(Main) Kaiserlei|Offenbach(Main) Ledermuseum|Offenbach(Main) Marktplatz|Offenbach(Main)Ost|Offenbach-Bieber|Heusenstamm|Dietzenbach-Steinberg|Dietzenbach Mitte|Dietzenbach Bahnhof"/>
+    </s>
+    <s id="-4626560744688666071-2308041335-12">
+        <tl f="S" t="p" o="800528" c="S" n="35143"/>
+        <ar pt="2308041414" pp="1" l="1" ppth="Wiesbaden Hbf|Wiesbaden Ost|Mainz-Kastel|Hochheim(Main)|Flörsheim(Main)|Eddersheim|Hattersheim(Main)|Frankfurt-Sindlingen|Frankfurt-Höchst Farbwerke|Frankfurt-Höchst|Frankfurt-Nied"/>
+        <dp pt="2308041414" pp="1" l="1" ppth="Frankfurt Hbf (tief)|Frankfurt(M)Taunusanlage|Frankfurt(M)Hauptwache|Frankfurt(M)Konstablerwache|Frankfurt(M)Ostendstraße|Frankfurt(M)Mühlberg|Offenbach(Main) Kaiserlei|Offenbach(Main) Ledermuseum|Offenbach(Main) Marktplatz|Offenbach(Main)Ost|Offenbach-Bieber|Offenbach-Waldhof|Obertshausen(Kr Of)|Rodgau-Weiskirchen|Rodgau-Hainhausen|Rodgau-Jügesheim|Rodgau-Dudenhofen|Rodgau-Nieder Roden|Rodgau-Rollwald|Rödermark-Ober Roden"/>
+    </s>
+    <s id="-5619317537571136986-2308041445-6">
+        <tl f="S" t="p" o="800528" c="S" n="36139"/>
+        <ar pt="2308041459" pp="1" l="1" ppth="Hattersheim(Main)|Frankfurt-Sindlingen|Frankfurt-Höchst Farbwerke|Frankfurt-Höchst|Frankfurt-Nied"/>
+        <dp pt="2308041459" pp="1" l="1" ppth="Frankfurt Hbf (tief)|Frankfurt(M)Taunusanlage|Frankfurt(M)Hauptwache|Frankfurt(M)Konstablerwache|Frankfurt(M)Ostendstraße|Frankfurt(M)Mühlberg|Offenbach(Main) Kaiserlei|Offenbach(Main) Ledermuseum|Offenbach(Main) Marktplatz|Offenbach(Main)Ost|Offenbach-Bieber|Offenbach-Waldhof|Obertshausen(Kr Of)|Rodgau-Weiskirchen|Rodgau-Hainhausen|Rodgau-Jügesheim|Rodgau-Dudenhofen|Rodgau-Nieder Roden|Rodgau-Rollwald|Rödermark-Ober Roden"/>
+    </s>
+    <s id="7958867701076781702-2308041418-7">
+        <tl f="S" t="p" o="800528" c="S" n="35245"/>
+        <ar pt="2308041434" pp="1" l="2" ppth="Hofheim(Taunus)|Kriftel|Frankfurt-Zeilsheim|Frankfurt-Höchst Farbwerke|Frankfurt-Höchst|Frankfurt-Nied"/>
+        <dp pt="2308041434" pp="1" l="2" ppth="Frankfurt Hbf (tief)|Frankfurt(M)Taunusanlage|Frankfurt(M)Hauptwache|Frankfurt(M)Konstablerwache|Frankfurt(M)Ostendstraße|Frankfurt(M)Mühlberg|Offenbach(Main) Kaiserlei|Offenbach(Main) Ledermuseum|Offenbach(Main) Marktplatz|Offenbach(Main)Ost|Offenbach-Bieber|Heusenstamm|Dietzenbach-Steinberg|Dietzenbach Mitte|Dietzenbach Bahnhof"/>
+    </s>
+    <s id="-562260543792597952-2308041348-7">
+        <tl f="S" t="p" o="800528" c="S" n="35243"/>
+        <ar pt="2308041404" pp="1" l="2" ppth="Hofheim(Taunus)|Kriftel|Frankfurt-Zeilsheim|Frankfurt-Höchst Farbwerke|Frankfurt-Höchst|Frankfurt-Nied"/>
+        <dp pt="2308041404" pp="1" l="2" ppth="Frankfurt Hbf (tief)|Frankfurt(M)Taunusanlage|Frankfurt(M)Hauptwache|Frankfurt(M)Konstablerwache|Frankfurt(M)Ostendstraße|Frankfurt(M)Mühlberg|Offenbach(Main) Kaiserlei|Offenbach(Main) Ledermuseum|Offenbach(Main) Marktplatz|Offenbach(Main)Ost|Offenbach-Bieber|Heusenstamm|Dietzenbach-Steinberg|Dietzenbach Mitte|Dietzenbach Bahnhof"/>
+    </s>
+    <s id="1936086192786741054-2308041334-16">
+        <tl f="S" t="p" o="800528" c="S" n="36236"/>
+        <ar pt="2308041411" pp="2" l="2" ppth="Dietzenbach Bahnhof|Dietzenbach Mitte|Dietzenbach-Steinberg|Heusenstamm|Offenbach-Bieber|Offenbach(Main)Ost|Offenbach(Main) Marktplatz|Offenbach(Main) Ledermuseum|Offenbach(Main) Kaiserlei|Frankfurt(M)Mühlberg|Frankfurt(M)Ostendstraße|Frankfurt(M)Konstablerwache|Frankfurt(M)Hauptwache|Frankfurt(M)Taunusanlage|Frankfurt Hbf (tief)"/>
+        <dp pt="2308041411" pp="2" l="2" ppth="Frankfurt-Nied|Frankfurt-Höchst"/>
+    </s>
+    <s id="-1367838650998860905-2308041414-3">
+        <tl f="S" t="p" o="800528" c="S" n="36235"/>
+        <ar pt="2308041419" pp="1" l="2" ppth="Frankfurt-Höchst|Frankfurt-Nied"/>
+        <dp pt="2308041419" pp="1" l="2" ppth="Frankfurt Hbf (tief)|Frankfurt(M)Taunusanlage|Frankfurt(M)Hauptwache|Frankfurt(M)Konstablerwache|Frankfurt(M)Ostendstraße|Frankfurt(M)Mühlberg|Offenbach(Main) Kaiserlei|Offenbach(Main) Ledermuseum|Offenbach(Main) Marktplatz|Offenbach(Main)Ost|Offenbach-Bieber|Heusenstamm|Dietzenbach-Steinberg|Dietzenbach Mitte|Dietzenbach Bahnhof"/>
+    </s>
+    <s id="9012233588303985492-2308041405-12">
+        <tl f="S" t="p" o="800528" c="S" n="35145"/>
+        <ar pt="2308041444" pp="1" l="1" ppth="Wiesbaden Hbf|Wiesbaden Ost|Mainz-Kastel|Hochheim(Main)|Flörsheim(Main)|Eddersheim|Hattersheim(Main)|Frankfurt-Sindlingen|Frankfurt-Höchst Farbwerke|Frankfurt-Höchst|Frankfurt-Nied"/>
+        <dp pt="2308041444" pp="1" l="1" ppth="Frankfurt Hbf (tief)|Frankfurt(M)Taunusanlage|Frankfurt(M)Hauptwache|Frankfurt(M)Konstablerwache|Frankfurt(M)Ostendstraße|Frankfurt(M)Mühlberg|Offenbach(Main) Kaiserlei|Offenbach(Main) Ledermuseum|Offenbach(Main) Marktplatz|Offenbach(Main)Ost|Offenbach-Bieber|Offenbach-Waldhof|Obertshausen(Kr Of)|Rodgau-Weiskirchen|Rodgau-Hainhausen|Rodgau-Jügesheim|Rodgau-Dudenhofen|Rodgau-Nieder Roden|Rodgau-Rollwald|Rödermark-Ober Roden"/>
+    </s>
+</timetable>
