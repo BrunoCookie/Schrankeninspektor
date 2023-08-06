@@ -1,4 +1,4 @@
-package com.bbonadonna.Schrankeninspektor;
+package com.BrunoCookie.Schrankeninspektor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
