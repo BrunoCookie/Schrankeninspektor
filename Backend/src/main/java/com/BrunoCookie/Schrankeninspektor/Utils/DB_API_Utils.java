@@ -2,8 +2,10 @@ package com.BrunoCookie.Schrankeninspektor.Utils;
 
 import lombok.Builder;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-@Service
+@Component
 public class DB_API_Utils {
     @Value("${clientId}")
     private String clientId;
@@ -32,13 +34,14 @@ public class DB_API_Utils {
     private final String TIMETABLE_RECENT_CHANGES = "rchg/";
     private final String GRIESHEIM_EVA_NO = "8002046";
     private final String FRANKFURT_HBF = "Frankfurt Hbf (tief)";
+    private final Logger logger = LoggerFactory.getLogger(DB_API_Utils.class);
 
     public HashSet<LocalDateTime> getTrainInformationFromAPI(LocalDateTime time) throws IOException {
         // Get Planned Data
         HashMap<String, Stop> stops = getPlannedData(time);
 
         // Apply recent changes to planned data
-        applyRecentChanges(stops);
+        applyRecentChanges(stops, getRecentChanges());
 
         HashSet<LocalDateTime> stopTimes = new HashSet<>();
         stops.forEach((id, stop) -> stopTimes.add(stop.getTime()));
@@ -46,9 +49,8 @@ public class DB_API_Utils {
         return stopTimes;
     }
 
-    private void applyRecentChanges(HashMap<String, Stop> stops) throws IOException {
-        // Get Recent Changes
-        ArrayList<Recent_Change> recentChanges = getRecentChanges();
+    public void applyRecentChanges(HashMap<String, Stop> stops, ArrayList<Recent_Change> recentChanges) {
+        logger.info("Applying recent changes to planned data...");
 
         // Compare both Hashmaps
         // Replace stop time if Change available
@@ -78,8 +80,12 @@ public class DB_API_Utils {
 
         // Extract % edit XML Response
         Document doc = getXMLFromHttpRequest(con);
+        return extractPlannedDataFromXML(doc);
+    }
 
-        // Fill Hashmap
+    public HashMap<String, Stop> extractPlannedDataFromXML(Document doc){
+        logger.info("Extracting planned data from XML-File: " + doc.getDocumentURI());
+
         HashMap<String, Stop> stops = new HashMap<>();
         NodeList nodeList = doc.getElementsByTagName("s");
         for (int i = 0; i < nodeList.getLength(); i++) {
@@ -108,7 +114,6 @@ public class DB_API_Utils {
 
             stops.put(stopId, stopObj);
         }
-
         return stops;
     }
 
@@ -118,8 +123,12 @@ public class DB_API_Utils {
 
         // Extract % edit XML Response
         Document doc = getXMLFromHttpRequest(con);
+        return extractRecentChangesFromXML(doc);
+    }
 
-        // Fill Hashmap
+    public ArrayList<Recent_Change> extractRecentChangesFromXML(Document doc){
+        logger.info("Extracting recent changes from XML-File: " + doc.getDocumentURI());
+
         ArrayList<Recent_Change> recentChanges = new ArrayList<>();
         NodeList nodeList = doc.getElementsByTagName("s");
         for (int i = 0; i < nodeList.getLength(); i++) {
@@ -139,7 +148,6 @@ public class DB_API_Utils {
                                            dpTime(dpTime).
                                            build());
         }
-
         return recentChanges;
     }
 
