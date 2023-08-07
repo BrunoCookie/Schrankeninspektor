@@ -6,14 +6,18 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 @Service
 public class Schrankeninspektor_Service {
     private final DB_API_Utils db_api_utils;
-
-    // String = StopID, LocalDateTime = Abfahrts-/Ankunftszeit
-    private HashMap<String, LocalDateTime> stopMap = new HashMap<>();
+    private boolean isCurrentlyOpen = false;
+    private LocalDateTime whenStatusChange = LocalDateTime.MIN;
+    HashSet<LocalDateTime> times = new HashSet<>();
+    // TODO: 1 Minute restriction
 
     @Autowired
     public Schrankeninspektor_Service(DB_API_Utils db_api_utils){
@@ -21,11 +25,78 @@ public class Schrankeninspektor_Service {
     }
 
     public boolean isCurrentlyOpen() throws IOException {
-        db_api_utils.getTrainInformationFromAPI(LocalDateTime.now());
-        return false;
+        updateStopTimes();
+        LocalDateTime currentTime = LocalDateTime.now();
+        isCurrentlyOpen = true;
+        if(currentTime.getMinute() > 55){
+            times.addAll(db_api_utils.getTrainInformationFromAPI(LocalDateTime.now().plusHours(1)));
+        }
+        for (LocalDateTime time : times) {
+            if(time.isBefore(currentTime)) continue;
+            long diff = ChronoUnit.MINUTES.between(currentTime, time);
+            if(diff <= 5){
+                isCurrentlyOpen = false;
+                break;
+            }
+        }
+        return isCurrentlyOpen;
     }
 
-    public LocalDateTime whenStatusChange(){
-        return LocalDateTime.now();
+    public LocalDateTime whenStatusChange() throws IOException {
+        return isCurrentlyOpen() ? findClosedSlot() : findOpenSlot();
+    }
+
+    // Find the next 5min Gap between 2 stops
+    private LocalDateTime findOpenSlot() throws IOException {
+        LocalDateTime openSlot = null;
+        ArrayList<LocalDateTime> timesList = new ArrayList(times);
+        while(openSlot == null){
+            openSlot = find5MinGap(LocalDateTime.now(), timesList);
+            if(openSlot == null){
+                LocalDateTime nextHour = timesList.get(0).plusHours(1);
+                timesList = new ArrayList(db_api_utils.getTrainInformationFromAPI(nextHour));
+            }
+        }
+        return openSlot;
+    }
+
+    // Find the next stop
+    private LocalDateTime findClosedSlot() throws IOException {
+        LocalDateTime closedSlot = null;
+        ArrayList<LocalDateTime> timesList = new ArrayList(times);
+        while(closedSlot == null){
+            closedSlot = findNextStopTime(LocalDateTime.now(), timesList);
+            if(closedSlot == null){
+                LocalDateTime nextHour = timesList.get(0).plusHours(1);
+                timesList = new ArrayList(db_api_utils.getTrainInformationFromAPI(nextHour));
+            }
+        }
+        return closedSlot;
+    }
+
+    private void updateStopTimes() throws IOException {
+        times = db_api_utils.getTrainInformationFromAPI(LocalDateTime.now());
+    }
+
+    public LocalDateTime find5MinGap(LocalDateTime currentTime, ArrayList<LocalDateTime> times){
+        Collections.sort(times);
+        for(int i = 0; i< times.size()-1; i++){
+            if(currentTime.isAfter(times.get(i))) continue;
+            long diff = ChronoUnit.MINUTES.between(times.get(i), times.get(i+1));
+            if(diff > 5){
+                return times.get(i).plusMinutes(1);
+            }
+        }
+        return null;
+    }
+
+    public LocalDateTime findNextStopTime(LocalDateTime currentTime, ArrayList<LocalDateTime> times){
+        Collections.sort(times);
+        for(int i = 0; i< times.size(); i++){
+            if(currentTime.isBefore(times.get(i))){
+                return times.get(i).minusMinutes(5);
+            }
+        }
+        return null;
     }
 }
