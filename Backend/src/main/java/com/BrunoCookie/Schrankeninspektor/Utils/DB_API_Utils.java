@@ -61,11 +61,14 @@ public class DB_API_Utils {
             }
 
             Stop stop = stops.get(recentChange.getId());
+            LocalDateTime newStopTime;
             if (stop.isTimeFromArrival()) {
-                stop.setTime(recentChange.getArTime());
+                newStopTime = recentChange.getArTime();
             } else {
-                stop.setTime(recentChange.getDpTime());
+                newStopTime = recentChange.getDpTime();
             }
+            if(newStopTime == null) stops.remove(stop.id);
+            else stop.setTime(newStopTime);
         }
 
         // Add new stops if not available in planned --> Ignore for now
@@ -94,11 +97,13 @@ public class DB_API_Utils {
 
             Element arrival = (Element) stop.getElementsByTagName("ar").item(0);
             Element departure = (Element) stop.getElementsByTagName("dp").item(0);
-            String nextStation = departure.getAttribute("ppth").split("\\|")[0];
+            String nextStation = findNextDestination(stop);
 
             String timeXML;
-            boolean isTimeFromArrival = nextStation.equals(FRANKFURT_HBF);
-            if (isTimeFromArrival) {
+            if(nextStation.isEmpty()){
+                continue;
+            }
+            else if (nextStation.equals(FRANKFURT_HBF) && arrival != null) {
                 timeXML = arrival.getAttribute("pt");
             } else {
                 timeXML = departure.getAttribute("pt");
@@ -109,7 +114,7 @@ public class DB_API_Utils {
             Stop stopObj = Stop.builder().
                                id(stopId).
                                time(formattedXMLTime).
-                               isTimeFromArrival(isTimeFromArrival).
+                               isTimeFromArrival(nextStation.equals(FRANKFURT_HBF)).
                                build();
 
             stops.put(stopId, stopObj);
@@ -133,14 +138,16 @@ public class DB_API_Utils {
         NodeList nodeList = doc.getElementsByTagName("s");
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element stop = (Element) nodeList.item(i);
-            String stopId = stop.getAttribute("id");
-
             Element arrival = (Element) stop.getElementsByTagName("ar").item(0);
             Element departure = (Element) stop.getElementsByTagName("dp").item(0);
+            String stopId = stop.getAttribute("id");
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmm"); // Bsp. Time: 2308041414
-            LocalDateTime arTime = LocalDateTime.parse(arrival.getAttribute("ct"), formatter);
-            LocalDateTime dpTime = LocalDateTime.parse(departure.getAttribute("ct"), formatter);
+            LocalDateTime arTime = null;
+            LocalDateTime dpTime = null;
+
+            if(arrival != null) arTime = LocalDateTime.parse(arrival.getAttribute("ct"), formatter);
+            if(departure != null) dpTime = LocalDateTime.parse(departure.getAttribute("ct"), formatter);
 
             recentChanges.add(Recent_Change.builder().
                                            id(stopId).
@@ -172,6 +179,14 @@ public class DB_API_Utils {
         }
         doc.getDocumentElement().normalize();
         return doc;
+    }
+
+    public String findNextDestination(Element stop){
+        Element departure = (Element) stop.getElementsByTagName("dp").item(0);
+        if(departure != null){
+            return departure.getAttribute("ppth").split("\\|")[0];
+        }
+        return "";
     }
 
     @Builder

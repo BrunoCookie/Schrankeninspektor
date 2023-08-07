@@ -43,32 +43,18 @@ public class Schrankeninspektor_Service {
     }
 
     public LocalDateTime whenStatusChange() throws IOException {
-        boolean isOpen = isCurrentlyOpen();
-        if(isOpen){
-            return findClosedSlot();
-        }
-        else{
-            return findOpenSlot();
-        }
+        return isCurrentlyOpen() ? findClosedSlot() : findOpenSlot();
     }
 
     // Find the next 5min Gap between 2 stops
     private LocalDateTime findOpenSlot() throws IOException {
         LocalDateTime openSlot = null;
-        ArrayList<LocalDateTime> sortedTimes = new ArrayList(times);
+        ArrayList<LocalDateTime> timesList = new ArrayList(times);
         while(openSlot == null){
-            Collections.sort(sortedTimes);
-            for(int i = 0; i< sortedTimes.size()-1; i++){
-                if(LocalDateTime.now().isAfter(sortedTimes.get(i))) continue;
-                long diff = ChronoUnit.MINUTES.between(sortedTimes.get(i), sortedTimes.get(i+1));
-                if(diff > 5){
-                    openSlot = sortedTimes.get(i).plusMinutes(1);
-                }
-            }
-
+            openSlot = find5MinGap(LocalDateTime.now(), timesList);
             if(openSlot == null){
-                LocalDateTime nextHour = sortedTimes.get(0).plusHours(1);
-                sortedTimes = new ArrayList(db_api_utils.getTrainInformationFromAPI(nextHour));
+                LocalDateTime nextHour = timesList.get(0).plusHours(1);
+                timesList = new ArrayList(db_api_utils.getTrainInformationFromAPI(nextHour));
             }
         }
         return openSlot;
@@ -77,18 +63,12 @@ public class Schrankeninspektor_Service {
     // Find the next stop
     private LocalDateTime findClosedSlot() throws IOException {
         LocalDateTime closedSlot = null;
-        ArrayList<LocalDateTime> sortedTimes = new ArrayList(times);
+        ArrayList<LocalDateTime> timesList = new ArrayList(times);
         while(closedSlot == null){
-            Collections.sort(sortedTimes);
-            for(int i = 0; i< sortedTimes.size(); i++){
-                if(LocalDateTime.now().isBefore(sortedTimes.get(i))){
-                    closedSlot = sortedTimes.get(i).minusMinutes(5);
-                }
-            }
-
+            closedSlot = findNextStopTime(LocalDateTime.now(), timesList);
             if(closedSlot == null){
-                LocalDateTime nextHour = sortedTimes.get(0).plusHours(1);
-                sortedTimes = new ArrayList(db_api_utils.getTrainInformationFromAPI(nextHour));
+                LocalDateTime nextHour = timesList.get(0).plusHours(1);
+                timesList = new ArrayList(db_api_utils.getTrainInformationFromAPI(nextHour));
             }
         }
         return closedSlot;
@@ -96,5 +76,27 @@ public class Schrankeninspektor_Service {
 
     private void updateStopTimes() throws IOException {
         times = db_api_utils.getTrainInformationFromAPI(LocalDateTime.now());
+    }
+
+    public LocalDateTime find5MinGap(LocalDateTime currentTime, ArrayList<LocalDateTime> times){
+        Collections.sort(times);
+        for(int i = 0; i< times.size()-1; i++){
+            if(currentTime.isAfter(times.get(i))) continue;
+            long diff = ChronoUnit.MINUTES.between(times.get(i), times.get(i+1));
+            if(diff > 5){
+                return times.get(i).plusMinutes(1);
+            }
+        }
+        return null;
+    }
+
+    public LocalDateTime findNextStopTime(LocalDateTime currentTime, ArrayList<LocalDateTime> times){
+        Collections.sort(times);
+        for(int i = 0; i< times.size(); i++){
+            if(currentTime.isBefore(times.get(i))){
+                return times.get(i).minusMinutes(5);
+            }
+        }
+        return null;
     }
 }
