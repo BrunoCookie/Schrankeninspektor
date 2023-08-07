@@ -24,7 +24,7 @@ public class Schrankeninspektor_Resource {
     }
 
     @GetMapping("/opensClosesNext")
-    public LocalDateTime opensClosesNext(){
+    public LocalDateTime opensClosesNext() throws IOException {
         return service.whenStatusChange();
     }
 }
