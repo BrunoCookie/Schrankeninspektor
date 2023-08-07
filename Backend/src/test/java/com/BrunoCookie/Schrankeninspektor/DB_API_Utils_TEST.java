@@ -17,9 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -29,8 +27,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class DB_API_Utils_TEST {
     @Autowired
     private DB_API_Utils db_api_utils;
-
-    private HashSet<LocalDateTime> expectedMergedTimes = new HashSet<>(Arrays.asList());
 
     @Test
     public void extractPlannedDataFromXMLTest() throws ParserConfigurationException, IOException, SAXException {
