@@ -14,10 +14,7 @@ import java.util.HashSet;
 @Service
 public class Schrankeninspektor_Service {
     private final DB_API_Utils db_api_utils;
-    private boolean isCurrentlyOpen = false;
-    private LocalDateTime whenStatusChange = LocalDateTime.MIN;
     HashSet<LocalDateTime> times = new HashSet<>();
-    // TODO: 1 Minute restriction
 
     @Autowired
     public Schrankeninspektor_Service(DB_API_Utils db_api_utils){
@@ -27,7 +24,6 @@ public class Schrankeninspektor_Service {
     public boolean isCurrentlyOpen() throws IOException {
         updateStopTimes();
         LocalDateTime currentTime = LocalDateTime.now();
-        isCurrentlyOpen = true;
         if(currentTime.getMinute() > 55){
             times.addAll(db_api_utils.getTrainInformationFromAPI(LocalDateTime.now().plusHours(1)));
         }
@@ -35,11 +31,10 @@ public class Schrankeninspektor_Service {
             if(time.isBefore(currentTime)) continue;
             long diff = ChronoUnit.MINUTES.between(currentTime, time);
             if(diff <= 5){
-                isCurrentlyOpen = false;
-                break;
+                return false;
             }
         }
-        return isCurrentlyOpen;
+        return true;
     }
 
     public LocalDateTime whenStatusChange() throws IOException {

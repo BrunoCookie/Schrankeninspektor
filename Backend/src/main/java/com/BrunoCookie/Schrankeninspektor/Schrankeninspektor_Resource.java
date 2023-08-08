@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @RequestMapping(path = "/api/inspektor")
 public class Schrankeninspektor_Resource {
     private final Schrankeninspektor_Service service;
+
     private boolean isCurrentlyOpen = false;
     private LocalDateTime isCurrentlyOpenCallTime = LocalDateTime.MIN;
 
