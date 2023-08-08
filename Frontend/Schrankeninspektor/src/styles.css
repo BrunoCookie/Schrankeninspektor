@@ -1,0 +1,34 @@
+/*Color Palette: German*/
+:root {
+  --header-footer-bg: #1a1a1a;
+  --header-footer-color: aliceblue;
+  --open-bg: #20bf6b;
+  --closed-bg: #fc5c65;
+  --link-hover: #78c5ff;
+}
+
+header{
+  font-family: 'Roboto Mono', monospace;
+  margin: 0;
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-color);
+  display: flex;
+  justify-content: space-around;
+}
+
+body{
+  margin: 0;
+  background-color: var(--open-bg);
+}
+
+footer{
+  font-family: 'Quicksand', monospace;
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-color);
+  margin-bottom: 0;
+  margin-top: 50px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

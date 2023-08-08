@@ -1,0 +1,19 @@
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.links div{
+  width: 33.3%;
+}
+
+a{
+  color: var(--header-footer-color);
+  text-decoration: none;
+}
+
+a:hover{
+  color: var(--link-hover);
+}
