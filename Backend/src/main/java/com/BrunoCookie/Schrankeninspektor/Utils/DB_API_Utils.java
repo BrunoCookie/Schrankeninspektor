@@ -43,6 +43,7 @@ public class DB_API_Utils {
         // Apply recent changes to planned data
         applyRecentChanges(stops, getRecentChanges());
 
+        // Put stop times in Set
         HashSet<LocalDateTime> stopTimes = new HashSet<>();
         stops.forEach((id, stop) -> stopTimes.add(stop.getTime()));
 
@@ -53,7 +54,7 @@ public class DB_API_Utils {
         logger.info("Applying recent changes to planned data...");
 
         // Compare both Hashmaps
-        // Replace stop time if Change available
+        // - Replace stop time if Change available
         for (int i = 0; i < recentChanges.size(); i++) {
             Recent_Change recentChange = recentChanges.get(i);
             if (!stops.containsKey(recentChange.getId())) {
@@ -71,7 +72,7 @@ public class DB_API_Utils {
             else stop.setTime(newStopTime);
         }
 
-        // Add new stops if not available in planned --> Ignore for now
+        // Add new stops if not available in planned, edge case: delayed into next hour --> Ignore for now
     }
 
     private HashMap<String, Stop> getPlannedData(LocalDateTime time) throws IOException {
