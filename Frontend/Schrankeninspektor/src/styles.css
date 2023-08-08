@@ -7,7 +7,6 @@
   --link-hover: #78c5ff;
 }
 
-
 header{
   font-family: 'Roboto Mono', monospace;
   margin: 0;
@@ -19,11 +18,11 @@ header{
 
 body{
   margin: 0;
-  background-color: var(--closed-bg);
+  background-color: var(--open-bg);
 }
 
 footer{
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Quicksand', monospace;
   background-color: var(--header-footer-bg);
   color: var(--header-footer-color);
   margin-bottom: 0;
