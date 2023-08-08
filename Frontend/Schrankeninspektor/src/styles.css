@@ -18,7 +18,7 @@ header{
 
 body{
   margin: 0;
-  background-color: var(--open-bg);
+  background-color: var(--closed-bg);
 }
 
 footer{
