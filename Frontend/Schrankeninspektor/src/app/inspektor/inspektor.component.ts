@@ -49,4 +49,13 @@ export class InspektorComponent implements OnInit, OnDestroy {
       console.log(this.statusChangeTime);
     });
   }
+
+  statusToString() : string{
+    if (this.isOpen) return "Offen";
+    else return "Geschlossen";
+  }
+
+  formattedTime() : string{
+    return this.statusChangeTime.substring(11,19)
+  }
 }
