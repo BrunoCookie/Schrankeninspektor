@@ -13,13 +13,14 @@ const refreshInterval = interval(60000);
 })
 export class InspektorComponent implements OnInit, OnDestroy {
   subscription: Subscription | undefined;
-  isOpen: booleanReturn | undefined;
+  isOpen: booleanReturn | any;
   statusChangeTime: string = '';
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
+    this.isOpen = {retData: false};
     this.refreshStatus();
     this.subscription = refreshInterval.subscribe(x => {
       this.refreshStatus()
@@ -38,7 +39,7 @@ export class InspektorComponent implements OnInit, OnDestroy {
   getIsOpen() {
     this.http.get<booleanReturn>(environment.apiUrl + "isCurrentlyOpen").subscribe(x => {
       this.isOpen = x;
-      console.log(this.isOpen);// this prints "true"
+      console.log(this.isOpen);
     });
   }
 

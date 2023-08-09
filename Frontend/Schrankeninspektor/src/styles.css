@@ -9,24 +9,37 @@
 
 header{
   font-family: 'Roboto Mono', monospace;
-  margin: 0;
   background-color: var(--header-footer-bg);
   color: var(--header-footer-color);
   display: flex;
   justify-content: space-around;
+  margin: 0;
+  padding: 0;
 }
 
-body{
+html{
+  height: 100%;
+}
+
+body {
   margin: 0;
-  min-height: 100%;
+  height: 90%;
+}
+
+.open{
+  background-color: var(--open-bg);
+  height: 100%;
+}
+
+.closed{
+  background-color: var(--closed-bg);
+  height: 100%;
 }
 
 footer{
   font-family: 'Quicksand', monospace;
   background-color: var(--header-footer-bg);
   color: var(--header-footer-color);
-  margin-bottom: 0;
-  margin-top: 50px;
   position: fixed;
   left: 0;
   bottom: 0;

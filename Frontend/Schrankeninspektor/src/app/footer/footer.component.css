@@ -17,3 +17,7 @@ a{
 a:hover{
   color: var(--link-hover);
 }
+
+p{
+  font-size: 1.3rem;
+}
