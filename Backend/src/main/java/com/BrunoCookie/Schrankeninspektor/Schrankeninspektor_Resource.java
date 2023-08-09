@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping(path = "/api/inspektor")
@@ -34,13 +35,15 @@ public class Schrankeninspektor_Resource {
     }
 
     @GetMapping("/StatusChange")
-    public LocalDateTime statusChange() throws IOException {
+    public String statusChange() throws IOException {
         if(compareCooldownTimer(statusChangeCallTime)){
             statusChangeCallTime = LocalDateTime.now();
             statusChange = service.whenStatusChange();
         }
 
-        return statusChange;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        String iso8601 = statusChange.format(formatter);
+        return iso8601;
     }
 
     private boolean compareCooldownTimer(LocalDateTime timer){
