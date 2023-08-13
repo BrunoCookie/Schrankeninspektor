@@ -1,0 +1,53 @@
+#content{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#isOpen{
+  flex-grow: 0.8;
+}
+
+#isOpen{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #1a1a1a;
+  font-size: 2rem;
+}
+
+#whenStatusChange{
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+#icon{
+  border: #1a1a1a solid 2px;
+  padding: 5px;
+  height: 250px;
+  width: 250px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+}
+
+#icon img{
+  width: 200px;
+  height: 200px;
+}
+
+#time{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  background-color: #1a1a1a;
+  padding: 10px;
+  border-radius: 5px;
+}

@@ -1,7 +1,7 @@
 /*Color Palette: German*/
 :root {
   --header-footer-bg: #1a1a1a;
-  --header-footer-color: aliceblue;
+  --font-color: aliceblue;
   --open-bg: #20bf6b;
   --closed-bg: #fc5c65;
   --link-hover: #78c5ff;
@@ -9,24 +9,37 @@
 
 header{
   font-family: 'Roboto Mono', monospace;
-  margin: 0;
   background-color: var(--header-footer-bg);
-  color: var(--header-footer-color);
   display: flex;
   justify-content: space-around;
+  margin: 0;
+  padding: 0;
 }
 
-body{
+html{
+  height: 100%;
+  color: var(--font-color);
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
   margin: 0;
+  height: 90%;
+}
+
+.open{
   background-color: var(--open-bg);
+  height: 100%;
+}
+
+.closed{
+  background-color: var(--closed-bg);
+  height: 100%;
 }
 
 footer{
   font-family: 'Quicksand', monospace;
   background-color: var(--header-footer-bg);
-  color: var(--header-footer-color);
-  margin-bottom: 0;
-  margin-top: 50px;
   position: fixed;
   left: 0;
   bottom: 0;

@@ -10,10 +10,14 @@
 }
 
 a{
-  color: var(--header-footer-color);
+  color: var(--font-color);
   text-decoration: none;
 }
 
 a:hover{
   color: var(--link-hover);
+}
+
+p{
+  font-size: 1.3rem;
 }
