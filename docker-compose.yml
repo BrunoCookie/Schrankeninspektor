@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  backend:
+    container_name: Backend-Container
+    build: ./Backend
+    volumes:
+      - './Backend:/usr/src/app'
+    ports:
+      - '8080:8080'
+    restart: always
+  frontend:
+    container_name: Frontend-Container
+    build: ./Frontend/Schrankeninspektor
+    volumes:
+      - './Frontend/Schrankeninspektor:/usr/src/app'
+    ports:
+      - '4200:80'
+    restart: always
+    networks:
+      - backend
+
+networks:
+  backend:
