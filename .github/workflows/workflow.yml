@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Web-App Deployment
 
 on:
   push:
@@ -16,9 +16,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -32,3 +30,20 @@ jobs:
         CLIENTID: ${{ secrets.CLIENT_ID }}
         CLIENTKEY: ${{ secrets.CLIENT_KEY }}
       run: mvn -B package --file Backend/pom.xml
+
+  deploy:
+    name: Deployment
+    runs-on: self-hosted
+    needs:
+      - build
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        if: github.event_name != 'pull_request'
+      - name: Start docker-compose
+        run: |
+          export CLIENTID=${{ secrets.CLIENT_ID }}
+          export CLIENTKEY=${{ secrets.CLIENT_KEY }}
+          docker-compose down
+          docker-compose up --build -d
+        if: github.event_name != 'pull_request'
