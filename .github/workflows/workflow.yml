@@ -29,7 +29,9 @@ jobs:
       env:
         CLIENTID: ${{ secrets.CLIENT_ID }}
         CLIENTKEY: ${{ secrets.CLIENT_KEY }}
-      run: mvn -B package --file Backend/pom.xml
+      run: |
+        mvn clean install
+        mvn -B package --file Backend/pom.xml
 
   deploy:
     name: Deployment
