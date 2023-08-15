@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping(path = "/api/inspektor")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "0.0.0.0:4200")
 public class Schrankeninspektor_Resource {
     private final Schrankeninspektor_Service service;
 
