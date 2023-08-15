@@ -17,4 +17,5 @@ public class SchrankeninspektorApplication {
 	public String ping(){
 		return "Pong!";
 	}
+
 }
