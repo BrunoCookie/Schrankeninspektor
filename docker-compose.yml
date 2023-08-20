@@ -12,6 +12,8 @@ services:
       clientId: '${CLIENTID}'
       clientKey: '${CLIENTKEY}'
     restart: always
+    networks:
+      - backend
   frontend:
     container_name: Frontend-Container
     build: ./Frontend/Schrankeninspektor
@@ -20,6 +22,8 @@ services:
     ports:
       - '4200:80'
     restart: always
+    depends_on:
+      - backend
     networks:
       - backend
 
