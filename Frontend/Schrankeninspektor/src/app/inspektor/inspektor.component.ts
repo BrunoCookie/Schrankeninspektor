@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environment/environment";
 import {interval, Subscription} from "rxjs";
 import {booleanReturn} from "../../interfaces/MyInterfaces";
 
@@ -37,14 +36,14 @@ export class InspektorComponent implements OnInit, OnDestroy {
   }
 
   getIsOpen() {
-    this.http.get<booleanReturn>(environment.apiUrl + "isCurrentlyOpen").subscribe(x => {
+    this.http.get<booleanReturn>("/api/inspektor/isCurrentlyOpen").subscribe(x => {
       this.isOpen = x;
       console.log(this.isOpen);
     });
   }
 
   getStatusChangeTime() {
-    this.http.get(environment.apiUrl + "StatusChange", {responseType: 'text'}).subscribe(x => {
+    this.http.get("/api/inspektor/StatusChange", {responseType: 'text'}).subscribe(x => {
       this.statusChangeTime = x;
       console.log(this.statusChangeTime);
     });
