@@ -8,6 +8,9 @@ services:
       - './Backend:/usr/src/app'
     ports:
       - '8080:8080'
+    environment:
+      clientId: '${CLIENTID}'
+      clientKey: '${CLIENTKEY}'
     restart: always
   frontend:
     container_name: Frontend-Container
