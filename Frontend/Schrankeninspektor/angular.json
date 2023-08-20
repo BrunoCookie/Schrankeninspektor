@@ -63,7 +63,8 @@
               "browserTarget": "Schrankeninspektor:build:production"
             },
             "development": {
-              "browserTarget": "Schrankeninspektor:build:development"
+              "browserTarget": "Schrankeninspektor:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
