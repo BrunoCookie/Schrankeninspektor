@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SchrankeninspektorApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("user.timezone", "Europe/Berlin");
 		SpringApplication.run(SchrankeninspektorApplication.class, args);
 	}
 
