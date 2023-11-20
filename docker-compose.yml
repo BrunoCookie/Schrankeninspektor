@@ -20,7 +20,7 @@ services:
     volumes:
       - './Frontend/Schrankeninspektor:/usr/src/app'
     ports:
-      - '80:85'
+      - '85:80'
     restart: always
     depends_on:
       - backend
