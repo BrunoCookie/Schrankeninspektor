@@ -14,6 +14,7 @@ import java.util.HashSet;
 @Service
 public class Schrankeninspektor_Service {
     private final DB_API_Utils db_api_utils;
+    private final int MIN_UNTIL_CLOSE = 3;
     HashSet<LocalDateTime> times = new HashSet<>();
 
     @Autowired
@@ -30,7 +31,7 @@ public class Schrankeninspektor_Service {
         for (LocalDateTime time : times) {
             if(time.isBefore(currentTime)) continue;
             long diff = ChronoUnit.MINUTES.between(currentTime, time);
-            if(diff <= 5){
+            if(diff <= MIN_UNTIL_CLOSE){
                 return false;
             }
         }
@@ -78,7 +79,7 @@ public class Schrankeninspektor_Service {
         for(int i = 0; i< times.size()-1; i++){
             if(currentTime.isAfter(times.get(i))) continue;
             long diff = ChronoUnit.MINUTES.between(times.get(i), times.get(i+1));
-            if(diff > 5){
+            if(diff > MIN_UNTIL_CLOSE){
                 return times.get(i).plusMinutes(1);
             }
         }
@@ -89,7 +90,7 @@ public class Schrankeninspektor_Service {
         Collections.sort(times);
         for(int i = 0; i< times.size(); i++){
             if(currentTime.isBefore(times.get(i))){
-                return times.get(i).minusMinutes(5);
+                return times.get(i).minusMinutes(MIN_UNTIL_CLOSE);
             }
         }
         return null;
