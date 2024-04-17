@@ -7,13 +7,15 @@ import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {InspektorComponent} from './inspektor/inspektor.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    InspektorComponent
+    InspektorComponent,
+    DisclaimerComponent
   ],
   imports: [
     BrowserModule,

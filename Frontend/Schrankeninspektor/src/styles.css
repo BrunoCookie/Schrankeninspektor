@@ -45,3 +45,16 @@ footer{
   background-color: var(--closed-bg);
   height: 80%;
 }
+
+a{
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+#content{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}

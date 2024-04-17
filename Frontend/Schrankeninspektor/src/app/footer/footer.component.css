@@ -10,11 +10,6 @@
   width: 33.3%;
 }
 
-a{
-  color: var(--font-color);
-  text-decoration: none;
-}
-
 a:hover{
   color: var(--link-hover);
 }
