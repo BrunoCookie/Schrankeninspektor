@@ -3,13 +3,11 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 2em;
 }
 
 #isOpen{
   flex-grow: 0.8;
-}
-
-#isOpen{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
