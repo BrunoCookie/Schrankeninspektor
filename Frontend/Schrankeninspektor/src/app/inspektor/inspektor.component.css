@@ -19,6 +19,10 @@
   gap: 0.1em;
 }
 
+#whenStatusChange p{
+  max-width: 75%;
+}
+
 #icon{
   border: #1a1a1a solid 2px;
   padding: 5px;
@@ -31,8 +35,7 @@
 }
 
 #icon img{
-  width: 200px;
-  height: 200px;
+  width: 75%;
 }
 
 #time{
@@ -41,4 +44,11 @@
   background-color: #1a1a1a;
   padding: 10px;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 450px) {
+  #icon{
+    height: 150px;
+    width: 150px;
+  }
 }
