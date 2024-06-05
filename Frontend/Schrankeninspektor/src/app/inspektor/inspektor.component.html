@@ -1,21 +1,21 @@
 <app-header></app-header>
 
-<body [className]="isOpen ? 'open' : 'closed'">
-  <div id="content">
-    <div id="isOpen">
-      <div id="icon">
-        <img src="../../assets/crossing.png"
-             title='<a href="https://www.flaticon.com/free-icons/railway" title="railway icons">Railway icons created by Smashicons - Flaticon</a>'>
-      </div>
-      <p>{{this.statusToString()}}</p>
+<div id="content" [className]="isOpen ? 'open' : 'closed'">
+  <div id="isOpen">
+    <div id="icon">
+      <img src="../../assets/crossing.png"
+           title='<a href="https://www.flaticon.com/free-icons/railway" title="railway icons">Railway icons created by Smashicons - Flaticon</a>'>
     </div>
-
-    <div id="whenStatusChange">
-      <p *ngIf="!isOpen">Die Schranke öffnet wieder um...</p>
-      <p *ngIf="isOpen">Die Schranke schließt wieder um...</p>
-      <p id="time">{{this.formattedTime()}}  Uhr</p>
-    </div>
+    <p>{{ this.statusToString() }}</p>
   </div>
-</body>
+
+  <hr/>
+
+  <div id="whenStatusChange">
+    <p *ngIf="!isOpen">Die Schranke öffnet wieder um...</p>
+    <p *ngIf="isOpen">Die Schranke schließt wieder um...</p>
+    <p id="time">{{ this.formattedTime() }}  Uhr</p>
+  </div>
+</div>
 
 <app-footer></app-footer>
