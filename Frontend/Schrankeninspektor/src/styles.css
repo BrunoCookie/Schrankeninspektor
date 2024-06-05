@@ -7,28 +7,6 @@
   --link-hover: #78c5ff;
 }
 
-#content{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-y: auto; /* Enable internal scrolling if needed */
-  flex-grow: 1;
-  padding: 20px;
-}
-
-header{
-  font-family: 'Roboto Mono', monospace;
-  background-color: var(--header-footer-bg);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
 body {
   font-family: 'Roboto Mono', monospace;
   margin: 0;
@@ -44,6 +22,27 @@ app-inspektor{
   flex-direction: column;
 }
 
+#content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+header{
+  font-family: 'Roboto Mono', monospace;
+  background-color: var(--header-footer-bg);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 footer{
   font-family: 'Quicksand', monospace;
   background-color: var(--header-footer-bg);
@@ -56,10 +55,8 @@ footer{
 
 .open{
   background-color: var(--open-bg);
-  height: 80%;
 }
 
 .closed{
   background-color: var(--closed-bg);
-  height: 80%;
 }

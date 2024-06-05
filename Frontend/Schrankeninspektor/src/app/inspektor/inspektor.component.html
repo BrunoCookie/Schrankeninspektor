@@ -9,6 +9,8 @@
     <p>{{ this.statusToString() }}</p>
   </div>
 
+  <hr/>
+
   <div id="whenStatusChange">
     <p *ngIf="!isOpen">Die Schranke öffnet wieder um...</p>
     <p *ngIf="isOpen">Die Schranke schließt wieder um...</p>

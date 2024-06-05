@@ -1,5 +1,4 @@
 #isOpen{
-  flex-grow: 0.8;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -9,7 +8,6 @@
 }
 
 #whenStatusChange{
-  margin-bottom: 2em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -22,17 +20,16 @@
 #icon{
   border: #1a1a1a solid 2px;
   padding: 5px;
-  height: 250px;
-  width: 250px;
+  max-height: 250px;
+  max-width: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2em;
 }
 
 #icon img{
-  width: 200px;
-  height: 200px;
+  width: 6em;
+  height: 6em;
 }
 
 #time{
@@ -41,4 +38,9 @@
   background-color: #1a1a1a;
   padding: 10px;
   border-radius: 5px;
+}
+
+hr{
+  width: 80vw;
+  border: black 1px solid;
 }
