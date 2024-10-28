@@ -1,6 +1,6 @@
 <body [className]="isOpen ? 'open' : 'closed'">
-  <div id="content">
-    <div id="isOpen">
+  <div class="content">
+    <div id="status">
       <div id="icon">
         <img src="../../assets/crossing.png"
              title='<a href="https://www.flaticon.com/free-icons/railway" title="railway icons">Railway icons created by Smashicons - Flaticon</a>'>
@@ -9,13 +9,11 @@
       <hr>
     </div>
 
-    <div id="whenStatusChange">
+    <div id="timeTillChange">
       <p *ngIf="!isOpen">Die Schranke öffnet wieder um</p>
       <p *ngIf="isOpen">Die Schranke schließt wieder um</p>
       <p id="time">{{this.formattedTime()}}  Uhr</p>
 
     </div>
-    <p id="disclaimerLink"><a routerLink="/disclaimer">DISCLAIMER</a></p>
-
   </div>
 </body>
