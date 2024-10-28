@@ -7,32 +7,16 @@
   --link-hover: #78c5ff;
 }
 
+html{
+  height: 100vh;
+}
+
 body {
   font-family: 'Roboto Mono', monospace;
   margin: 0;
-  height: 100%;
   color: var(--font-color);
-  min-height: 90vh;
-}
-
-footer{
-  font-family: 'Quicksand', monospace;
-  background-color: var(--header-footer-bg);
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 8%;
-}
-
-.open{
-  background-color: var(--open-bg);
-  height: 80%;
-}
-
-.closed{
-  background-color: var(--closed-bg);
-  height: 80%;
+  height: 84vh;
+  overflow-y: auto;
 }
 
 a{
@@ -43,7 +27,10 @@ a{
 #content{
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   text-align: center;
+}
+
+p{
+  max-width: 75vw;
 }

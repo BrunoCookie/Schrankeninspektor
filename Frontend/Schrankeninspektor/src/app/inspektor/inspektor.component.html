@@ -6,12 +6,16 @@
              title='<a href="https://www.flaticon.com/free-icons/railway" title="railway icons">Railway icons created by Smashicons - Flaticon</a>'>
       </div>
       <p>{{this.statusToString()}}</p>
+      <hr>
     </div>
 
     <div id="whenStatusChange">
       <p *ngIf="!isOpen">Die Schranke öffnet wieder um</p>
       <p *ngIf="isOpen">Die Schranke schließt wieder um</p>
       <p id="time">{{this.formattedTime()}}  Uhr</p>
+
     </div>
+    <p id="disclaimerLink"><a routerLink="/disclaimer">DISCLAIMER</a></p>
+
   </div>
 </body>
