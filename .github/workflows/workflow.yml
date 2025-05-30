@@ -47,6 +47,6 @@ jobs:
         run: |
           export CLIENTID=${{ secrets.CLIENT_ID }}
           export CLIENTKEY=${{ secrets.CLIENT_KEY }}
-          docker-compose down
-          docker-compose up --build -d
+          docker compose down
+          docker compose up --build -d
         if: github.event_name != 'pull_request'
