@@ -88,7 +88,7 @@ public class DB_API_Utils {
     }
 
     public HashMap<String, Stop> extractPlannedDataFromXML(Document doc){
-        logger.info("Extracting planned data from XML-File: " + doc.getDocumentURI());
+        logger.info("Extracting planned data...");
 
         HashMap<String, Stop> stops = new HashMap<>();
         NodeList nodeList = doc.getElementsByTagName("s");
@@ -133,7 +133,7 @@ public class DB_API_Utils {
     }
 
     public ArrayList<Recent_Change> extractRecentChangesFromXML(Document doc){
-        logger.info("Extracting recent changes from XML-File: " + doc.getDocumentURI());
+        logger.info("Extracting recent changes...");
 
         ArrayList<Recent_Change> recentChanges = new ArrayList<>();
         NodeList nodeList = doc.getElementsByTagName("s");
